@@ -1,10 +1,20 @@
 <script lang="ts">
-    import type {Countries} from "$lib/types";
-    export let data: Countries;
+    import Search from "$lib/components/Search.svelte";
+    export let data: {countries: unknown};
+    let filteredCountries = data.countries || [];
+    const handleSearch = (event: CustomEvent) => {
+        const searchTerm = event.detail;
+        filteredCountries = data.countries.filter((item) =>
+            item.name.common.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }
 </script>
 
 <main class="main">
-    {#each data?.countries as country, i (i)}
+    <Search
+            on:search={handleSearch}
+    />
+    {#each filteredCountries as country, i (i)}
         <a href="/{country?.name?.common.toLowerCase().replace(/\s/g,'-')}">{country?.name?.common}</a>
     {/each}
 </main>
