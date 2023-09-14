@@ -1,13 +1,16 @@
 import type {PageLoad} from "../../../.svelte-kit/types/src/routes/[slug]/$types";
+import { error } from '@sveltejs/kit';
 
 export const load: PageLoad = async ({fetch, params}) => {
     try {
         const fetchCountryData = async () => {
             const response = await fetch(
-                `https://restcountries.com/v3.1/name/${params.slug.replace(/-/g, " ")}?fields=name,population,region,subregion,capital,tld,currencies,languages,borders`
+                `https://restcountries.com/v3.1/name/${params.slug.replace(/-/g, " ")}?fields=name,flags,population,region,subregion,capital,tld,currencies,languages,borders`
             )
             if(!response.ok){
-                throw new Error(`HTTP error: ${response.status}`)
+                throw error(response.status, {
+                    message: `HTTP error: ${response.status}`
+                });
             }
             const country = await response.json();
             const borders =  country[0].borders;

@@ -1,0 +1,10 @@
+<script lang="ts">
+    import {theme} from "$lib/stores/theme";
+</script>
+
+<svelte:head>
+    <meta name="color-scheme" content={
+  $theme}/> <link rel="stylesheet" href={`/theme/${$theme}.css`} />
+</svelte:head>
+
+<slot />

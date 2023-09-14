@@ -1,5 +1,6 @@
 <script lang="ts">
-    export let data;
+    import type {MainCountry} from "$lib/types";
+    export let data: MainCountry;
 </script>
 
 <!--<h1>{data.slug.replace(/-/g, " ")}</h1>-->
