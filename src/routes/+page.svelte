@@ -1,23 +1,28 @@
 <script lang="ts">
     import type {Countries} from "$lib/types";
-    import ThemeSwitcher from "$lib/components/ThemeSwitcher.svelte";
     export let data: Countries;
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<ThemeSwitcher />
-<div>
+<main class="main">
     {#each data?.countries as country, i (i)}
         <a href="/{country?.name?.common.toLowerCase().replace(/\s/g,'-')}">{country?.name?.common}</a>
     {/each}
-</div>
+</main>
 
 
 
 <style>
+    :root {
+        --box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    }
     :global(body) {
         font-family: "Nunito Sans", sans-serif;
         background: var(--bg);
+        padding: 0;
+        margin: 0;
+    }
+    .main {
+        padding: 30px 20px 80px 20px;
     }
 </style>
 
