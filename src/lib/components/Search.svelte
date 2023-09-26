@@ -1,9 +1,12 @@
 <script lang="ts">
     import {createEventDispatcher} from "svelte";
-    const dispatch = createEventDispatcher<{search: string}>();
-    let searchValue = "";
+    import {searchQuery} from "../stores/searchQuery";
+
+    const dispatch = createEventDispatcher<{search: unknown}>();
+    let searchValue = $searchQuery.searchTerm;
     const handleSearch = () => {
-        dispatch("search", searchValue);
+        $searchQuery.searchTerm = searchValue;
+        dispatch("search");
     }
 
 </script>

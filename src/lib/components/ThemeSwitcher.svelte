@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {theme} from "$lib/stores/theme";
+    import {theme} from "../stores/theme";
     export let label = "Dark Mode";
     let isDarkMode = $theme === "dark";
 </script>

@@ -1,20 +1,26 @@
 <script lang="ts">
+    import Filter from "$lib/components/Filter.svelte";
     import Search from "$lib/components/Search.svelte";
-    export let data: {countries: unknown};
-    let filteredCountries = data.countries || [];
-    const handleSearch = (event: CustomEvent) => {
-        const searchTerm = event.detail;
-        filteredCountries = data.countries.filter((item) =>
-            item.name.common.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+    import type {MainCountry} from "$lib/types";
+    import {searchQuery} from "../lib/stores/searchQuery";
+    export let data: {countries: MainCountry[]};
+    let displayedCountries = data.countries || [];
+    let regions = Array.from(new Set(displayedCountries.map((country) => country.region))) || [];
+    const handleSearch = () => {
+        displayedCountries = data.countries.filter((country) =>
+            country.name.common.toLowerCase().includes($searchQuery.searchTerm.toLowerCase()) &&
+            country.region.includes($searchQuery.selectedFilter)
+        )
     }
+
 </script>
 
 <main class="main">
     <Search
             on:search={handleSearch}
     />
-    {#each filteredCountries as country, i (i)}
+    <Filter title="region" options={regions} on:select={handleSearch} />
+    {#each displayedCountries as country, i (i)}
         <a href="/{country?.name?.common.toLowerCase().replace(/\s/g,'-')}">{country?.name?.common}</a>
     {/each}
 </main>

@@ -1,4 +1,4 @@
-export interface BorderCountry {
+export type BorderCountry = {
     name: {
         official: string,
         common: string,
@@ -13,7 +13,7 @@ type Currency = {
     }
 }
 
-export interface MainCountry extends BorderCountry {
+export type MainCountry = BorderCountry & {
     capital: string[],
     region: string,
     population: number,
