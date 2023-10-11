@@ -4,10 +4,10 @@
     export let title = "", options: string[];
     const filterDefaultValue = `Filter by ${title}`;
     const dispatch = createEventDispatcher<{select: unknown}>();
-    let selectedValue = $searchQuery.selectedFilter;
+    let selectedValue = "";
     const onSelect = () => {
         $searchQuery.selectedFilter = selectedValue;
-        dispatch("select")
+        dispatch("select");
     }
 
 </script>

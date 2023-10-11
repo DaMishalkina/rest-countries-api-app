@@ -3,8 +3,9 @@
     import Search from "$lib/components/Search.svelte";
     import type {MainCountry} from "$lib/types";
     import {searchQuery} from "../lib/stores/searchQuery";
+    import {onMount} from "svelte";
     export let data: {countries: MainCountry[]};
-    let displayedCountries = data.countries || [];
+    let displayedCountries = data?.countries || [];
     let regions = Array.from(new Set(displayedCountries.map((country) => country.region))) || [];
     const handleSearch = () => {
         displayedCountries = data.countries.filter((country) =>
@@ -12,6 +13,9 @@
             country.region.includes($searchQuery.selectedFilter)
         )
     }
+    onMount(() => {
+        searchQuery.set({searchTerm : "", selectedFilter: "" });
+    });
 
 </script>
 

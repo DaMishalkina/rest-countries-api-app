@@ -3,7 +3,7 @@
     import {searchQuery} from "../stores/searchQuery";
 
     const dispatch = createEventDispatcher<{search: unknown}>();
-    let searchValue = $searchQuery.searchTerm;
+    let searchValue = "";
     const handleSearch = () => {
         $searchQuery.searchTerm = searchValue;
         dispatch("search");
