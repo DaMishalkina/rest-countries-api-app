@@ -22,7 +22,7 @@
         background: var(--elements-bg);
         text-decoration: none;
         color: var(--text-color);
-        box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+        box-shadow: var(--box-shadow);
         border: none;
         border-radius: 3px;
         font-size: 16px;
