@@ -96,6 +96,8 @@
         .main {
             padding: 50px;
             gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .main__filters {
             flex-direction: row;

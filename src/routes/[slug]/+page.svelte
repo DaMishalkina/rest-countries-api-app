@@ -37,31 +37,41 @@
                 src={data?.country?.flags?.png}
                 alt="{data?.country?.name?.common} Flag"
         >
-        <h1 class="country-data__title">{data?.country?.name?.common}</h1>
-        <div class="country-details country-data__details">
-            <ul class="country-details__list">
-                {#each Object.entries(countryData) as [key, value] (key)}
-                    <li class="country-detail country-details__item">
-                        <span class="country-detail__field-name">{key}: </span>
-                        <span>{value}</span>
-                    </li>
-                {/each}
-            </ul>
-            {#if data?.borders.length > 0}
-                <div class="borders-container country-data__borders-container">
-                    <p class="borders-container__title">Border Countries:</p>
-                    <ul class="borders-container__list">
-                        {#each data?.borders as border (border.name.common)}
-                            <li>
-                                <Action
-                                        link="/{replaceSpaceWithDash(border?.name?.official)}"
-                                        title={border?.name?.common}
-                                />
-                            </li>
-                        {/each}
-                    </ul>
-                </div>
-            {/if}
+        <div class="country-data__text">
+            <h1 class="country-data__title">{data?.country?.name?.common}</h1>
+            <div class="country-details country-data__details">
+                <ul class="country-details__list">
+                    {#each Object.entries(countryData).slice(0, 5) as [key, value] (key)}
+                        <li class="country-detail country-details__item">
+                            <span class="country-detail__field-name">{key}: </span>
+                            <span>{value}</span>
+                        </li>
+                    {/each}
+                </ul>
+                <ul class="country-details__list">
+                    {#each Object.entries(countryData).slice(5) as [key, value] (key)}
+                        <li class="country-detail country-details__item">
+                            <span class="country-detail__field-name">{key}: </span>
+                            <span>{value}</span>
+                        </li>
+                    {/each}
+                </ul>
+                {#if data?.borders.length > 0}
+                    <div class="borders-container country-data__borders-container">
+                        <p class="borders-container__title">Border Countries:</p>
+                        <ul class="borders-container__list">
+                            {#each data?.borders as border (border.name.common)}
+                                <li>
+                                    <Action
+                                            link="/{replaceSpaceWithDash(border?.name?.official)}"
+                                            title={border?.name?.common}
+                                    />
+                                </li>
+                            {/each}
+                        </ul>
+                    </div>
+                {/if}
+            </div>
         </div>
     </section>
 </main>
@@ -88,7 +98,6 @@
         display: flex;
         flex-direction: column;
         padding: 80px 55px 100px 55px;
-        background: var(--bg);
         gap: 60px;
     }
     .country-data__image {
@@ -121,9 +130,6 @@
         gap: 20px;
         font-size: 16px;
     }
-    .country-detail:nth-child(5) {
-        margin-bottom: 40px;
-    }
     .country-detail__field-name {
         text-transform: capitalize;
         font-weight: 600;
@@ -141,15 +147,54 @@
         .country-details {
             gap: 96px;
         }
-        .country-detail:nth-child(5){
-            margin-bottom: 20px;
-        }
         .borders-container__list {
             padding: 40px 0 20px 0;
         }
     }
     @media (min-width: 1200px) {
-        
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 80px;
+        }
+        .country-data {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .country-data__image {
+            min-width: 560px;
+            width: 560px;
+            height: 402px;
+            margin-right: 60px;
+        }
+        .country-data__title {
+            margin: 0 0 40px 0;
+        }
+        .country-details {
+            row-gap: 56px;
+            column-gap: 120px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .country-details__list {
+            gap: 18px;
+        }
+        .borders-container {
+            display: flex;
+            grid-column: 1 /span 2;
+            gap: 15px;
+            align-items: center;
+        }
+        .borders-container__title {
+            padding: 20px 0;
+            white-space: nowrap;
+            font-size: 16px;
+        }
+        .borders-container__list {
+            padding: 20px 0;
+        }
+
     }
 </style>
 

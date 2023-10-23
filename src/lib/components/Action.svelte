@@ -40,6 +40,15 @@
     .action:active, .action:focus {
         transform: translateY(-1px);
     }
+    @media (min-width: 1200px) {
+        .action {
+            padding: 8px 28px;
+        }
+        .action--large {
+            padding: 12px 16px;
+        }
+
+    }
 </style>
 
 

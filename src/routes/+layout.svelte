@@ -8,19 +8,25 @@
   $theme}/> <link rel="stylesheet" href={`/theme/${$theme}.css`} />
 </svelte:head>
 <header class="header">
-    <h1 class="header__title">Where in the world?</h1>
-    <ThemeSwitcher />
+    <div class="header__container">
+        <h1 class="header__title">Where in the world?</h1>
+        <ThemeSwitcher />
+    </div>
 </header>
 <slot />
 
 <style>
     .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         padding: 40px 20px;
         background: var(--elements-bg);
         box-shadow: var(--box-shadow);
+    }
+    .header__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
     }
     .header__title {
         font-size: 14px;
