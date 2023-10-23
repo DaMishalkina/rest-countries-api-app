@@ -10,14 +10,14 @@
    />
     <div class="card__content">
         <p class="card__title">{cardTitle}</p>
-        <div class="card-infos card__infos">
+        <ul class="card-infos card__infos">
             {#each cardInfos as cardInfo, i (i)}
-                <p class="card-info">
+                <li class="card-info">
                     <span class="card-info__field-name">{cardInfo.split(":")[0]}: </span>
                     <span>{cardInfo.split(":")[1]}</span>
-                </p>
+                </li>
             {/each}
-        </div>
+        </ul>
     </div>
 </a>
 

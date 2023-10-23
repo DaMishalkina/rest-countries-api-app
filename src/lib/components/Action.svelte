@@ -16,7 +16,7 @@
 <style>
     .action {
         display: flex;
-        padding: 20px;
+        padding: 14px 20px;
         justify-content: center;
         align-items: center;
         background: var(--elements-bg);
@@ -28,9 +28,10 @@
         font-size: 16px;
         gap: 20px;
         flex: 1;
+        white-space: nowrap;
     }
     .action--large {
-        padding: 20px 50px;
+        padding: 16px 50px;
         align-self: flex-start;
     }
     .action:hover {

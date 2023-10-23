@@ -4,6 +4,8 @@
     import Search from "$lib/components/Search.svelte";
     import type {MainCountry} from "$lib/types";
     import {searchQuery} from "../lib/stores/searchQuery";
+    import {divideNumberWithComa} from "$lib/utils/divideNumberWithComa";
+    import {replaceSpaceWithDash} from "$lib/utils/replaceSpaceWithDash";
     import {onMount} from "svelte";
     export let data: {countries: MainCountry[]};
     let displayedCountries = data?.countries || [];
@@ -27,15 +29,15 @@
         />
         <Filter title="region" options={regions} on:select={handleSearch} />
     </section>
-    {#if displayedCountries && displayedCountries.length > 0}
+    {#if displayedCountries?.length > 0}
         <section class="main__countries-list">
             {#each displayedCountries as country, i (i)}
                 <Card
-                        cardLink="/{country?.name?.common.toLowerCase().replace(/\s/g,'-')}"
+                        cardLink="/{replaceSpaceWithDash(country?.name?.official)}"
                         cardTitle={country?.name?.common}
-                        cardImage={country?.flags.png}
+                        cardImage={country?.flags?.png}
                         cardInfos={[
-                            `Population: ${country?.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
+                            `Population: ${divideNumberWithComa(country?.population)}`,
                             `Region: ${country?.region}`,
                             `Capital: ${country?.capital[0]}`
                              ]}
@@ -62,6 +64,11 @@
     }
     :global(p){
         margin: 0;
+    }
+    :global(ul), :global(li){
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
     .main {
         padding: 30px 20px 80px 20px;

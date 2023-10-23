@@ -2,7 +2,11 @@ export type BorderCountry = {
     name: {
         official: string,
         common: string,
-        [index: string]: unknown
+        nativeName: {
+            [index: string]: {
+                [index: string]: string
+            }
+        }
     }
 }
 
