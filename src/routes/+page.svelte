@@ -14,7 +14,7 @@
         )
     }
     onMount(() => {
-        searchQuery.set({searchTerm : "", selectedFilter: "" });
+       handleSearch();
     });
 
 </script>
@@ -37,6 +37,12 @@
         background: var(--bg);
         padding: 0;
         margin: 0;
+    }
+    :global(input), :global(button) {
+        font-family: "Nunito Sans", sans-serif;
+    }
+    :global(button){
+        cursor: pointer;
     }
     .main {
         padding: 30px 20px 80px 20px;

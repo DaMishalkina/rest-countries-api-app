@@ -3,7 +3,7 @@
     import {searchQuery} from "../stores/searchQuery";
     export let placeholder = "Search for a country...";
     const dispatch = createEventDispatcher<{search: unknown}>();
-    let searchValue = "";
+    let searchValue =  $searchQuery.searchTerm;
     const handleSearch = () => {
         $searchQuery.searchTerm = searchValue;
         dispatch("search");
@@ -61,6 +61,7 @@
     width: 100%;
     color: var(--text-color);
     font-family: "Nunito Sans", sans-serif;
+    font-size: 14px;
 }
 .search-container__input:active, .search-container__input:focus {
     outline: none;
