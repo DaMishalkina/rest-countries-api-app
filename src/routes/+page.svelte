@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Card from "$lib/components/Card.svelte";
     import Filter from "$lib/components/Filter.svelte";
     import Search from "$lib/components/Search.svelte";
     import type {MainCountry} from "$lib/types";
@@ -29,7 +30,16 @@
     {#if displayedCountries && displayedCountries.length > 0}
         <section class="main__countries-list">
             {#each displayedCountries as country, i (i)}
-                <a href="/{country?.name?.common.toLowerCase().replace(/\s/g,'-')}">{country?.name?.common}</a>
+                <Card
+                        cardLink="/{country?.name?.common.toLowerCase().replace(/\s/g,'-')}"
+                        cardTitle={country?.name?.common}
+                        cardImage={country?.flags.png}
+                        cardInfos={[
+                            `Population: ${country?.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`,
+                            `Region: ${country?.region}`,
+                            `Capital: ${country?.capital[0]}`
+                             ]}
+                />
             {/each}
         </section>
     {/if}
@@ -49,6 +59,9 @@
     }
     :global(button){
         cursor: pointer;
+    }
+    :global(p){
+        margin: 0;
     }
     .main {
         padding: 30px 20px 80px 20px;
