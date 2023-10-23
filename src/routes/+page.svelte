@@ -1,12 +1,13 @@
 <script lang="ts">
     import Card from "$lib/components/Card.svelte";
-    import Filter from "$lib/components/Filter.svelte";
-    import Search from "$lib/components/Search.svelte";
-    import type {MainCountry} from "$lib/types";
-    import {searchQuery} from "../lib/stores/searchQuery";
     import {divideNumberWithComa} from "$lib/utils/divideNumberWithComa";
-    import {replaceSpaceWithDash} from "$lib/utils/replaceSpaceWithDash";
+    import Filter from "$lib/components/Filter.svelte";
     import {onMount} from "svelte";
+    import {replaceSpaceWithDash} from "$lib/utils/replaceSpaceWithDash";
+    import Search from "$lib/components/Search.svelte";
+    import {searchQuery} from "../lib/stores/searchQuery";
+
+    import type {MainCountry} from "$lib/types";
     export let data: {countries: MainCountry[]};
     let displayedCountries = data?.countries || [];
     let regions = Array.from(new Set(displayedCountries.map((country) => country.region))) || [];

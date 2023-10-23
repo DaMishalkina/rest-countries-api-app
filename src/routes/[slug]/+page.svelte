@@ -1,8 +1,9 @@
 <script lang="ts">
-    import type {MainCountry, BorderCountry} from "$lib/types";
     import Action from "$lib/components/Action.svelte";
     import {divideNumberWithComa} from "$lib/utils/divideNumberWithComa";
     import {replaceSpaceWithDash} from "$lib/utils/replaceSpaceWithDash";
+
+    import type {MainCountry, BorderCountry} from "$lib/types";
 
     export let data: {country: MainCountry, borders: BorderCountry[]};
     $: countryData = {

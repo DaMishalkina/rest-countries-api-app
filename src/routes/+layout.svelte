@@ -1,6 +1,7 @@
 <script lang="ts">
     import {theme} from "../lib/stores/theme";
     import ThemeSwitcher from "$lib/components/ThemeSwitcher.svelte";
+    export const prerender = true;
 </script>
 
 <svelte:head>
