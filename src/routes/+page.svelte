@@ -20,13 +20,19 @@
 </script>
 
 <main class="main">
-    <Search
-            on:search={handleSearch}
-    />
-    <Filter title="region" options={regions} on:select={handleSearch} />
-    {#each displayedCountries as country, i (i)}
-        <a href="/{country?.name?.common.toLowerCase().replace(/\s/g,'-')}">{country?.name?.common}</a>
-    {/each}
+    <section class="main__filters">
+        <Search
+                on:search={handleSearch}
+        />
+        <Filter title="region" options={regions} on:select={handleSearch} />
+    </section>
+    {#if displayedCountries && displayedCountries.length > 0}
+        <section class="main__countries-list">
+            {#each displayedCountries as country, i (i)}
+                <a href="/{country?.name?.common.toLowerCase().replace(/\s/g,'-')}">{country?.name?.common}</a>
+            {/each}
+        </section>
+    {/if}
 </main>
 
 
@@ -46,6 +52,19 @@
     }
     .main {
         padding: 30px 20px 80px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px
+    }
+    .main__filters {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+    .main__countries-list {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
     }
 </style>
 
