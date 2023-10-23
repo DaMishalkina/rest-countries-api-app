@@ -1,4 +1,5 @@
 <script lang="ts">
+    import {base} from "$app/paths";
     import Card from "$lib/components/Card.svelte";
     import {divideNumberWithComa} from "$lib/utils/divideNumberWithComa";
     import Filter from "$lib/components/Filter.svelte";
@@ -34,7 +35,7 @@
         <section class="main__countries-list">
             {#each displayedCountries as country, i (i)}
                 <Card
-                        cardLink="/{replaceSpaceWithDash(country?.name?.official)}"
+                        cardLink={base + `/${replaceSpaceWithDash(country?.name?.official)}`}
                         cardTitle={country?.name?.common}
                         cardImage={country?.flags?.png}
                         cardInfos={[

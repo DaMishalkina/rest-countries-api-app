@@ -1,12 +1,12 @@
 <script lang="ts">
+    import {base} from "$app/paths";
     import {theme} from "../lib/stores/theme";
     import ThemeSwitcher from "$lib/components/ThemeSwitcher.svelte";
-    export const prerender = true;
 </script>
 
 <svelte:head>
     <meta name="color-scheme" content={
-  $theme}/> <link rel="stylesheet" href={`/theme/${$theme}.css`} />
+  $theme}/> <link rel="stylesheet" href={base +`/theme/${$theme}.css`} />
 </svelte:head>
 <header class="header">
     <div class="header__container">

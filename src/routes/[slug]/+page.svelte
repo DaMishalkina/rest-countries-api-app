@@ -1,5 +1,6 @@
 <script lang="ts">
     import Action from "$lib/components/Action.svelte";
+    import {base} from "$app/paths";
     import {divideNumberWithComa} from "$lib/utils/divideNumberWithComa";
     import {replaceSpaceWithDash} from "$lib/utils/replaceSpaceWithDash";
 
@@ -64,7 +65,7 @@
                             {#each data?.borders as border (border.name.common)}
                                 <li>
                                     <Action
-                                            link="/{replaceSpaceWithDash(border?.name?.official)}"
+                                            link={base + `/${replaceSpaceWithDash(border?.name?.official)}`}
                                             title={border?.name?.common}
                                     />
                                 </li>
