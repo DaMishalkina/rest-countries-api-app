@@ -48,16 +48,19 @@
                 {/each}
             </ul>
             {#if data?.borders.length > 0}
-                <ul class="country-data__borders">
-                    {#each data?.borders as border (border.name.common)}
-                        <li>
-                            <Action
-                                    link="/{replaceSpaceWithDash(border?.name?.official)}"
-                                    title={border?.name?.common}
-                            />
-                        </li>
-                    {/each}
-                </ul>
+                <div class="borders-container country-data__borders-container">
+                    <p class="borders-container__title">Border Countries:</p>
+                    <ul class="borders-container__list">
+                        {#each data?.borders as border (border.name.common)}
+                            <li>
+                                <Action
+                                        link="/{replaceSpaceWithDash(border?.name?.official)}"
+                                        title={border?.name?.common}
+                                />
+                            </li>
+                        {/each}
+                    </ul>
+                </div>
             {/if}
         </div>
     </section>
@@ -96,7 +99,11 @@
     .country-data__title {
         margin: 60px 0;
     }
-    .country-data__borders {
+    .borders-container__title {
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .borders-container__list {
         display: flex;
         gap: 20px;
         width: 100%;
@@ -106,7 +113,7 @@
     .country-details {
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: 60px;
     }
     .country-details__list {
         display: flex;
@@ -120,6 +127,26 @@
     .country-detail__field-name {
         text-transform: capitalize;
         font-weight: 600;
+    }
+    @media (min-width: 750px) {
+        .main {
+            gap: 128px;
+        }
+        .country-data__title {
+            margin: 100px 0 60px 0;
+        }
+        .country-details__list {
+            gap: 40px;
+        }
+        .country-details {
+            gap: 96px;
+        }
+        .country-detail:nth-child(5){
+            margin-bottom: 20px;
+        }
+        .borders-container__list {
+            padding: 40px 0 20px 0;
+        }
     }
 </style>
 
