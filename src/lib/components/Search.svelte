@@ -37,6 +37,7 @@
     position: relative;
     display: flex;
     width: 100%;
+    max-width: 480px;
 }
 .search-container__icon {
     width: 20px;

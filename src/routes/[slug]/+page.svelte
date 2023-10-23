@@ -148,6 +148,9 @@
             padding: 40px 0 20px 0;
         }
     }
+    @media (min-width: 1200px) {
+        
+    }
 </style>
 
 

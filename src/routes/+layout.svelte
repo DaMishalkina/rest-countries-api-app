@@ -27,4 +27,10 @@
         font-weight: 800;
     }
 
+    @media (min-width: 1200px) {
+        .header {
+            padding: 30px 50px;
+        }
+    }
+
 </style>

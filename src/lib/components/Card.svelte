@@ -58,5 +58,14 @@
     .card-info__field-name {
         font-weight: 600;
     }
+    @media (min-width: 1200px) {
+        .card__content {
+            padding: 30px 25px 46px 25px;
+            gap: 23px;
+        }
+        .card-infos {
+            gap: 11px;
+        }
+    }
 </style>
 

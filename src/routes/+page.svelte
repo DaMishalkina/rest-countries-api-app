@@ -86,5 +86,25 @@
         flex-direction: column;
         gap: 50px;
     }
+    @media (min-width: 660px) {
+        .main__countries-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (min-width: 1200px) {
+        .main {
+            padding: 50px;
+            gap: 50px;
+        }
+        .main__filters {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .main__countries-list {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 70px;
+        }
+    }
 </style>
 
