@@ -6,7 +6,7 @@
 
     import type {MainCountry, BorderCountry} from "../../lib/types";
     import type {LocalDataCountry} from "../../lib/types";
-    export let data: {country: MainCountry | LocalDataCountry, borders: LocalDataCountry[] | BorderCountry[]};
+    export let data: {country: MainCountry | LocalDataCountry, borders?: LocalDataCountry[] | BorderCountry[]};
 
     $: countryData = typeof data?.country?.name === "string" ? {
         "name": (data?.country as LocalDataCountry)?.name,
@@ -30,7 +30,7 @@
         ...((data?.country as MainCountry)?.languages && { "languages": Object.values((data?.country as MainCountry)?.languages).join(", ")})
     }
 
-    $: bordersData = data?.borders?.map(border => {
+    $: bordersData = data?.borders && data?.borders?.map(border => {
         if(typeof border?.name === "string"){
             return {
                 "name": (border as LocalDataCountry).name,
@@ -84,7 +84,7 @@
                         </li>
                     {/each}
                 </ul>
-                {#if bordersData.length > 0}
+                {#if bordersData && bordersData.length > 0}
                     <div class="borders-container country-data__borders-container">
                         <p class="borders-container__title">Border Countries:</p>
                         <ul class="borders-container__list">
