@@ -7,20 +7,19 @@
     import type {MainCountry, BorderCountry} from "../../lib/types";
     import type {LocalDataCountry} from "../../lib/types";
     export let data: {country: MainCountry | LocalDataCountry, borders?: LocalDataCountry[] | BorderCountry[]};
-
     $: countryData = typeof data?.country?.name === "string" ? {
         "name": (data?.country as LocalDataCountry)?.name,
         "native name":  (data?.country as LocalDataCountry)?.nativeName,
         "population": divideNumberWithComa( (data?.country as LocalDataCountry)?.population),
         "region":  (data?.country as LocalDataCountry)?.region,
         "sub region":  (data?.country as LocalDataCountry)?.subregion,
-        "capital":  (data?.country as LocalDataCountry)?.capital,
         "top level domain": (data?.country as LocalDataCountry)?.topLevelDomain[0],
-        "currencies": Object.values((data?.country as LocalDataCountry)?.currencies).map(currency => currency.name).join(", "),
-        "languages": (data?.country as LocalDataCountry)?.languages.map(language => language.name).join(", "),
-        } : {
+        ...((data?.country as LocalDataCountry)?.capital && {"capital": (data?.country as LocalDataCountry)?.capital}),
+        ...((data?.country as LocalDataCountry)?.currencies && { "currencies": Object.values((data?.country as LocalDataCountry)?.currencies).map(currency => currency.name).join(", ")}),
+        "languages": (data?.country as LocalDataCountry)?.languages.map(language => language.name).join(", ")
+    } : {
         "name": (data?.country as MainCountry)?.name?.common,
-       "native name": Object.entries((data?.country as MainCountry)?.name?.nativeName).map(([language, name]) => `${name.common} (${language})`).join(", "),
+        "native name": Object.entries((data?.country as MainCountry)?.name?.nativeName).map(([language, name]) => `${name.common} (${language})`).join(", "),
         "population": divideNumberWithComa((data?.country as MainCountry)?.population),
         "region": (data?.country as MainCountry)?.region,
         "sub region":(data?.country as MainCountry)?.subregion,
@@ -29,6 +28,7 @@
         ...((data?.country as MainCountry)?.currencies && { "currencies": Object.values((data?.country as MainCountry)?.currencies).map(currency => currency.name).join(", ")}),
         ...((data?.country as MainCountry)?.languages && { "languages": Object.values((data?.country as MainCountry)?.languages).join(", ")})
     }
+
 
     $: bordersData = data?.borders && data?.borders?.map(border => {
         if(typeof border?.name === "string"){
