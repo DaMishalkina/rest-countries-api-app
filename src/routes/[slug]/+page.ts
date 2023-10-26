@@ -10,21 +10,18 @@ export const load: PageLoad = async ({fetch, params}) => {
     try {
         const fetchCountryData = async () => {
             const response = await fetch(
-                `https://restcountries.com/v3.1/alpha/${params.slug}?fields=name,flags,population,region,subregion,capital,tld,currencies,languages,borders,cca3`
+                "https://raw.githubusercontent.com/DaMishalkina/rest-countries-api-app/main/static/data/data.json"
             )
             if(!response.ok){
                 const fallbackResponse = await fetch(
-                    "https://raw.githubusercontent.com/DaMishalkina/rest-countries-api-app/main/static/data/data.json"
+                    `https://restcountries.com/v3.1/alpha/${params.slug}?fields=name,flags,population,region,subregion,capital,tld,currencies,languages,borders,cca3`
                 );
                 if(!fallbackResponse.ok){
                     throw error(404, {
                         message: "Not found"
                     });
                 }
-                const countries = await fallbackResponse.json();
-                country = countries.find((countryItem: LocalDataCountry) => {
-                    return countryItem.alpha3Code.toLowerCase() === params.slug
-                });
+                country = await fallbackResponse.json();
                 borders =  country.borders;
 
                 return {
@@ -32,7 +29,10 @@ export const load: PageLoad = async ({fetch, params}) => {
                     borders: borders
                 }
             }
-            country = await response.json();
+            const countries = await response.json();
+            country = countries.find((countryItem: LocalDataCountry) => {
+                return countryItem.alpha3Code.toLowerCase() === params.slug
+            });
             borders =  country.borders;
 
             return {
@@ -44,21 +44,21 @@ export const load: PageLoad = async ({fetch, params}) => {
             try {
                 const borders = await fetchCountryData().then(({ borders }) => borders);
                 const borderPromises = borders.map(async (border: string) => {
-                    const response = await fetch(`https://restcountries.com/v3.1/alpha/${border}?fields=name,cca3`);
+                    const response = await fetch("https://raw.githubusercontent.com/DaMishalkina/rest-countries-api-app/main/static/data/data.json");
                     if (!response.ok) {
                         const fallbackResponse = await fetch(
-                            "https://raw.githubusercontent.com/DaMishalkina/rest-countries-api-app/main/static/data/data.json"
+                            `https://restcountries.com/v3.1/alpha/${border}?fields=name,cca3`
                         );
                         if(fallbackResponse.ok){
-                            const allCountries = await fallbackResponse.json();
-                            return allCountries.find((countryItem: LocalDataCountry) => {
-                                return countryItem.alpha3Code === border
-                            });
+                            return fallbackResponse.json();
                         }
                         console.error(`Failed to fetch data for border: ${border}`);
                         return { name: 'Fallback Border Name' }
                     }
-                    return response.json();
+                    const allCountries = await response.json();
+                    return allCountries.find((countryItem: LocalDataCountry) => {
+                        return countryItem.alpha3Code === border
+                    });
                 });
 
                 return await Promise.all(borderPromises);
