@@ -47,7 +47,7 @@
 </script>
 
 <main class="main">
-    <Action link="/" title="Back" isLarge>
+    <Action link={base + "/"} title="Back" isLarge>
         <svg
                 width="22"
                 height="22"
