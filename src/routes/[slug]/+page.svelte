@@ -7,6 +7,7 @@
     import type {MainCountry, BorderCountry} from "../../lib/types";
     import type {LocalDataCountry} from "../../lib/types";
     export let data: {country: MainCountry | LocalDataCountry, borders: LocalDataCountry[] | BorderCountry[]};
+
     $: countryData = typeof data?.country?.name === "string" ? {
         "name": (data?.country as LocalDataCountry)?.name,
         "native name":  (data?.country as LocalDataCountry)?.nativeName,

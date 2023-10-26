@@ -33,7 +33,7 @@ export const load: PageLoad = async ({fetch, params}) => {
                 }
             }
             country = await response.json();
-            borders =  country[0].borders;
+            borders =  country.borders;
 
             return {
                 country: country,
@@ -63,10 +63,7 @@ export const load: PageLoad = async ({fetch, params}) => {
 
                 return await Promise.all(borderPromises);
             } catch (error) {
-                // Handle any errors that may occur during the fetch
                 console.error('Fetch Border Data Error:', error);
-                // You can decide to return a fallback response or throw an error here
-                // Example using a fallback response:
                 return [];
             }
         };
