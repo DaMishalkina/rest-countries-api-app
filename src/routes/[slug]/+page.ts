@@ -7,9 +7,9 @@ export const load: PageLoad = async ({fetch, params}) => {
             const response = await fetch(
                 `https://restcountries.com/v3.1/name/${params.slug.replace(/-/g, " ")}?fields=name,flags,population,region,subregion,capital,tld,currencies,languages,borders`
             )
-            if(!response.ok){
-                throw error(response.status, {
-                    message: `HTTP error: ${response.status}`
+            if(!response.ok || !response){
+                throw error(404, {
+                    message: 'Not found'
                 });
             }
             const country = await response.json();
