@@ -1,38 +1,53 @@
-# create-svelte
+# Frontend Mentor - Rock Paper Scissors solution
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This is a solution to the [REST Countries API with color theme switcher](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca).
 
-## Creating a project
+## Table of contents
 
-If you're seeing this, you've probably already done this step. Congrats!
+- [Overview](#overview)
+    - [The challenge](#the-challenge)
+    - [Links](#links)
+- [My process](#my-process)
+    - [Built with](#built-with)
+    - [What I learned](#what-i-learned)
+    - [Issues and modifications](#issues-and-modifications)
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## Overview
 
-## Developing
+### The challenge
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Users should be able to:
 
-```bash
-npm run dev
+- See all countries from the API on the homepage
+- Search for a country using an `input` field
+- Filter countries by region
+- Click on a country to see more detailed information on a separate page
+- Click through to the border countries on the detail page
+- Toggle the color scheme between light and dark mode *(optional)*
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
 
-## Building
+### Links
 
-To create a production version of your app:
+- Solution URL: [rest-countries-api-app](https://github.com/DaMishalkina/rest-countries-api-app)
 
-```bash
-npm run build
-```
+## My process
 
-You can preview the production build with `npm run preview`.
+### Built with
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- SvelteKit
+- TypeScript
+- Vite
+- Mobile-first workflow
+
+
+### What I learned
+
+I have tried SvelteKit routing and data fetching.
+
+### Issues and modifications
+
+- I have run into difficulties with rest countries api, building my sveltekit app, that's why I have gotten data from my git repository. However, there is luck of some data, foe example, no borders for the Czech Republic.
+
+- Moreover, I have decided to use value of 1200px as min-width for desktop version.
+
