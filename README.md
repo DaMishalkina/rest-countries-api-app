@@ -29,8 +29,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [rest-countries-api-app](https://github.com/DaMishalkina/rest-countries-api-app)
-- Live Site URL: [rest-countries-api-app](https://damishalkina.github.io/rest-countries-api-app)
+- Solution URL: [rest-countries-api-app](https://damishalkina.github.io/rest-countries-api-app)
 
 ## My process
 
