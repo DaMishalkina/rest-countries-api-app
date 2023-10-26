@@ -4,20 +4,45 @@
     import {divideNumberWithComa} from "$lib/utils/divideNumberWithComa";
     import {replaceSpaceWithDash} from "$lib/utils/replaceSpaceWithDash";
 
-    import type {MainCountry, BorderCountry} from "$lib/types";
-
-    export let data: {country: MainCountry, borders: BorderCountry[]};
-    $: countryData = {
-        "native name": Object.entries(data?.country?.name?.nativeName).map(([language, name]) => `${name.common} (${language})`).join(", "),
-        "population": divideNumberWithComa(data?.country?.population),
-        "region": data?.country?.region,
-        "sub region": data?.country?.subregion,
-        "capital": data?.country?.capital[0],
-        ...(data?.country?.tld && {"top level domain": data.country.tld[0]}),
-        ...(data?.country?.currencies && { "currencies": Object.values(data.country.currencies).map(currency => currency.name).join(", ")}),
-        ...(data?.country?.languages && { "languages": Object.values(data.country.languages).join(", ")}),
-
+    import type {MainCountry, BorderCountry} from "../../lib/types";
+    import type {LocalDataCountry} from "../../lib/types";
+    export let data: {country: MainCountry | LocalDataCountry, borders: LocalDataCountry[] | BorderCountry[]};
+    $: countryData = typeof data?.country?.name === "string" ? {
+        "name": (data?.country as LocalDataCountry)?.name,
+        "native name":  (data?.country as LocalDataCountry)?.nativeName,
+        "population": divideNumberWithComa( (data?.country as LocalDataCountry)?.population),
+        "region":  (data?.country as LocalDataCountry)?.region,
+        "sub region":  (data?.country as LocalDataCountry)?.subregion,
+        "capital":  (data?.country as LocalDataCountry)?.capital,
+        "top level domain": (data?.country as LocalDataCountry)?.topLevelDomain[0],
+        "currencies": Object.values((data?.country as LocalDataCountry)?.currencies).map(currency => currency.name).join(", "),
+        "languages": (data?.country as LocalDataCountry)?.languages.map(language => language.name).join(", "),
+        } : {
+        "name": (data?.country as MainCountry)?.name?.common,
+       "native name": Object.entries((data?.country as MainCountry)?.name?.nativeName).map(([language, name]) => `${name.common} (${language})`).join(", "),
+        "population": divideNumberWithComa((data?.country as MainCountry)?.population),
+        "region": (data?.country as MainCountry)?.region,
+        "sub region":(data?.country as MainCountry)?.subregion,
+        "capital": (data?.country as MainCountry)?.capital[0],
+        ...((data?.country as MainCountry)?.tld && {"top level domain": (data?.country as MainCountry).tld[0]}),
+        ...((data?.country as MainCountry)?.currencies && { "currencies": Object.values((data?.country as MainCountry)?.currencies).map(currency => currency.name).join(", ")}),
+        ...((data?.country as MainCountry)?.languages && { "languages": Object.values((data?.country as MainCountry)?.languages).join(", ")})
     }
+
+    $: bordersData = data?.borders?.map(border => {
+        if(typeof border?.name === "string"){
+            return {
+                "name": (border as LocalDataCountry).name,
+                "cca3": (border as LocalDataCountry).alpha3Code
+            }
+        }
+        return {
+            "name": (border as BorderCountry).name.common,
+            "cca3": (border as BorderCountry).cca3
+        }
+    })
+
+
 </script>
 
 <main class="main">
@@ -37,10 +62,10 @@
         <img
                 class="country-data__image"
                 src={data?.country?.flags?.png}
-                alt="{data?.country?.name?.common} Flag"
+                alt="{countryData.name} Flag"
         >
         <div class="country-data__text">
-            <h1 class="country-data__title">{data?.country?.name?.common}</h1>
+            <h1 class="country-data__title">{countryData.name}</h1>
             <div class="country-details country-data__details">
                 <ul class="country-details__list">
                     {#each Object.entries(countryData).slice(0, 5) as [key, value] (key)}
@@ -58,15 +83,15 @@
                         </li>
                     {/each}
                 </ul>
-                {#if data?.borders.length > 0}
+                {#if bordersData.length > 0}
                     <div class="borders-container country-data__borders-container">
                         <p class="borders-container__title">Border Countries:</p>
                         <ul class="borders-container__list">
-                            {#each data?.borders as border (border.name.common)}
+                            {#each bordersData as border (border.cca3)}
                                 <li>
                                     <Action
-                                            link={base + `/${replaceSpaceWithDash(border?.name?.official)}`}
-                                            title={border?.name?.common}
+                                            link={base + `/${replaceSpaceWithDash(border?.cca3)}`}
+                                            title={border?.name}
                                     />
                                 </li>
                             {/each}

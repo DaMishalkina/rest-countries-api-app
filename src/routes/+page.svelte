@@ -8,7 +8,7 @@
     import Search from "$lib/components/Search.svelte";
     import {searchQuery} from "../lib/stores/searchQuery";
 
-    import type {MainCountry} from "$lib/types";
+    import type {MainCountry} from "../lib/types";
     export let data: {countries: MainCountry[]};
     let displayedCountries = data?.countries || [];
     let regions = Array.from(new Set(displayedCountries.map((country) => country.region))) || [];
@@ -35,7 +35,7 @@
         <section class="main__countries-list">
             {#each displayedCountries as country, i (i)}
                 <Card
-                        cardLink={base + `/${replaceSpaceWithDash(country?.name?.official)}`}
+                        cardLink={base + `/${replaceSpaceWithDash(country?.cca3)}`}
                         cardTitle={country?.name?.common}
                         cardImage={country?.flags?.png}
                         cardInfos={[
