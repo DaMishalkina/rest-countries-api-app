@@ -3,6 +3,7 @@
     --bg: hsl(0, 0%, 98%);
     --elements-bg:  hsl(0, 0%, 100%);
     --elements-bg--hover: #dbdbdb;
+    --elements-bg--blur: rgba(243,243,243,1);
     --input-color:  hsl(0, 0%, 52%);
     --box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }

@@ -3,11 +3,13 @@
 </script>
 
 <a href={cardLink} class="card">
-   <img
-           class="card__image"
-           src={cardImage}
-           alt="{cardTitle} Flag"
-   />
+    <div class="card__image-container">
+        <img
+                class="card__image"
+                src={cardImage}
+                alt="{cardTitle} Flag"
+        />
+    </div>
     <div class="card__content">
         <p class="card__title">{cardTitle}</p>
         <ul class="card-infos card__infos">
@@ -32,9 +34,20 @@
         color: var(--text-color);
         box-shadow: var(--box-shadow);
     }
-    .card__image {
-        height: 200px;
+    .card__image-container {
+        background: var(--elements-bg--blur);
+        position: relative;
+        max-height: 200px;
+        max-width: 100%;
         width: 100%;
+        height: 200px;
+        display: flex;
+    }
+    .card__image {
+        max-height: 200px;
+        max-width: 100%;
+        width: auto;
+        margin: auto auto;
         display: flex;
     }
     .card__content {

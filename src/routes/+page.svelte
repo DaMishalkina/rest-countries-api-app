@@ -37,7 +37,7 @@
                 <Card
                         cardLink={base + `/${replaceSpaceWithDash(country?.cca3)}`}
                         cardTitle={country?.name?.common}
-                        cardImage={country?.flags?.png}
+                        cardImage={country?.flags?.svg}
                         cardInfos={[
                             `Population: ${divideNumberWithComa(country?.population)}`,
                             `Region: ${country?.region}`,
