@@ -60,11 +60,13 @@
         </svg>
     </Action>
     <section class="country-data main__country-data">
-        <img
-                class="country-data__image"
-                src={data?.country?.flags?.png}
-                alt="{countryData.name} Flag"
-        >
+        <div class="country-data__image-container">
+            <img
+                    class="country-data__image"
+                    src={data?.country?.flags?.svg}
+                    alt="{countryData.name} Flag"
+            >
+        </div>
         <div class="country-data__text">
             <h1 class="country-data__title">{countryData.name}</h1>
             <div class="country-details country-data__details">
@@ -128,10 +130,15 @@
         padding: 80px 55px 100px 55px;
         gap: 60px;
     }
+    .country-data__image-container {
+        display: flex;
+        background: var(--elements-bg--blur);
+    }
     .country-data__image {
         width: 100%;
         max-height: 458px;
         display: flex;
+        margin: auto auto;
     }
     .country-data__title {
         margin: 60px 0;
@@ -169,6 +176,9 @@
         .country-data__title {
             margin: 100px 0 60px 0;
         }
+        .country-data__image-container {
+            height: 458px;
+        }
         .country-details__list {
             gap: 40px;
         }
@@ -190,11 +200,14 @@
             flex-direction: row;
             justify-content: space-between;
         }
+        .country-data__image-container {
+            height: auto;
+            margin-right: 60px;
+        }
         .country-data__image {
             min-width: 560px;
             width: 560px;
             height: 402px;
-            margin-right: 60px;
         }
         .country-data__title {
             margin: 0 0 40px 0;
